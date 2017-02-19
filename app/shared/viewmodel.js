@@ -24,7 +24,7 @@ function TaskViewModel(data, node_data) {
   }
 }
 
-function ServiceViewModel(data) {
+function ServiceViewModel(data, tasks) {
   this.Model = data;
   this.Id = data.ID;
   this.Name = data.Spec.Name;
@@ -35,6 +35,9 @@ function ServiceViewModel(data) {
     this.Replicas = data.Spec.Mode.Replicated.Replicas;
   } else {
     this.Mode = 'global';
+  }
+  if (tasks) {
+    this.Running = tasks.length;
   }
   this.Labels = data.Spec.Labels;
   if (data.Spec.TaskTemplate.ContainerSpec) {
